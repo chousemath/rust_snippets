@@ -1,3 +1,8 @@
+/*
+    General Notes
+    - a crate is a package of Rust code
+*/
+
 // bring the input/output library (from the standard library) into scope
 use std::io;
 
@@ -15,8 +20,15 @@ fn main() {
     // :: indicates that new is an associated function of the String type (static method)
     // the new instance of String is an empty string
     let mut guess = String::new();
+
+    // call the associated function stdin() on the io library
+    // argument of read_line must be mutable to accept user input
+    // references are immutable by default, therefore &mut is required
+    // read_line returns io::Result (an enumeration, variants: Ok, Err), encodes error reports
+    // the way it is set up now, Rust will crash the program if there is an Err
     io::stdin().read_line(&mut guess).expect("Failed to read line...");
-    println!("You just entered: \x1b[36;1m{}\x1b[0m", guess);
+    // {} is a placeholder that holds a value in place
+    println!("\x1b[33;1mYou just entered:\x1b[0m \x1b[36;1m{}\x1b[0m", guess);
 
     // check that the input is in the expected form
 }

@@ -18,4 +18,8 @@ fn main() {
         work (again, string interpolation)
     */
     println!("{}", statement_a);
+
+    let x = 12;
+    let y = 15;
+    println!("x = {}, y = {}, x + y = {}", x, y, x + y);
 }
