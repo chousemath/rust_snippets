@@ -19,6 +19,27 @@ pub extern "C" fn sum(x: i32, y: i32) -> i32 {
 }
 
 #[no_mangle]
+pub extern "C" fn sub(x: i32, y: i32) -> i32 {
+    return x - y;
+}
+
+#[no_mangle]
+pub extern "C" fn div(x: f32, y: f32) -> f32 {
+    return x / y;
+}
+
+#[no_mangle]
+pub extern "C" fn fact(x: i32) -> i32 {
+    if x < 0 {
+        return 0;
+    } else if x == 0 {
+        return 1;
+    } else {
+        return x * fact(x - 1);
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn transform_url(url: String) -> String {
     let owned_string = format!("http:{}", url);
     let mut q_index = 0;
