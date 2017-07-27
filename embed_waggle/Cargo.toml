@@ -1,0 +1,10 @@
+[package]
+name = "embed_waggle"
+version = "0.1.0"
+authors = ["Joseph Sungpil Choi <chousemath@gmail.com>"]
+
+[dependencies]
+
+[lib]
+name = "embed_waggle"
+crate-type = ["dylib"]
