@@ -17,6 +17,6 @@ puts EmbedWaggle.sum(1, 2)
 puts EmbedWaggle.sub(33, 22)
 puts EmbedWaggle.div(100, 25)
 puts EmbedWaggle.fact(-4)
-# EmbedWaggle.say("Repeated!")
+EmbedWaggle.say("Repeated!")
 
 puts 'done!'

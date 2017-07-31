@@ -40,6 +40,20 @@ pub extern "C" fn fact(x: i32) -> i32 {
 }
 
 #[no_mangle]
+pub extern "C" fn fact2(x: i32) -> i32 {
+    if x <= 0 {
+        return 0;
+    } else {
+        let upper_limit = x + 1;
+        let mut product = 1;
+        for i in 1..upper_limit {
+            product = product * i;
+        }
+        return product;
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn transform_url(url: String) -> String {
     let owned_string = format!("http:{}", url);
     let mut q_index = 0;

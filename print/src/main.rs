@@ -22,4 +22,24 @@ fn main() {
     let x = 12;
     let y = 15;
     println!("x = {}, y = {}, x + y = {}", x, y, x + y);
+    println!("Factorial of -5 is {} (should be 0)", fact2(-5));
+    println!("Factorial of 0 is {} (should be 1)", fact2(0));
+    println!("Factorial of 3 is {} (should be 6)", fact2(3));
+    println!("Factorial of 4 is {} (should be 24)", fact2(4));
+    println!("Factorial of 5 is {} (should be 120)", fact2(5));
+}
+
+fn fact2(x: i32) -> i32 {
+    if x < 0 {
+        return 0;
+    } else if x == 0{
+        return 1;
+    } else {
+        let upper_limit = x + 1;
+        let mut product = 1;
+        for i in 1..upper_limit {
+            product = product * i;
+        }
+        return product;
+    }
 }
