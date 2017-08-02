@@ -25,6 +25,48 @@ fn main() {
     let z = z + 20;
     println!("The new value of z is {}", z);
     // in Rust, we are not allowed to mutate a variable type, use shadowing for that
+
+    let guess: u32 = "42".parse().expect("Not a number");
+    println!("guess is {}", guess);
+
+    // example of a double precision floating point number in Rust
+    let x1 = 2.0;
+    println!("The size of x1 is {} bytes", std::mem::size_of_val(&x1));
+
+    // example of a single precision floating point number in Rust
+    let x2: f32 = 125.2;
+    println!("The size of x2 is {} bytes", std::mem::size_of_val(&x2));
+
+    // Rust has two primitive compound types, tuples and arrays
+    // example of a tuple
+    let yy: (&str, u32) = ("hadouken", 9000);
+    println!("The size of yy is {} bytes", std::mem::size_of_val(&yy));
+    // use pattern matching to destructure a tuple
+    let (yy1, yy2) = yy;
+    println!("The first value of yy is {}", yy1);
+    println!("The first value of yy is {}", yy.0);
+    println!("The second value of yy is {}", yy2);
+    println!("The second value of yy is {}", yy.1);
+
+    // arrays in Rust have fixed length
+    // arrays are useful when you want stack allocation rather than heap allocation
+    // an array is a single chunk of memory allocated on the stack
+    let arr_a = [1, 2, 3, 4, 5];
+    let mut counter = 0;
+    println!("The length of arr_a is {}", arr_a.len());
+    for i in &arr_a {
+        println!("element {} of arr_a => {}", counter, i);
+        counter += 1;
+    }
+
+    println!("First value of arr_a = {}", arr_a[0]);
+
+    // Rust panic is when the program exits with an error
+
+    say_hello();
+    let (wisdom_a, wisdom_b) = spit_wisdom(55);
+    println!("{}", wisdom_a);
+    println!("{}", wisdom_b);
 }
 
 fn addition(a: i32, b: i32) -> i32 {
@@ -71,4 +113,15 @@ fn get_file_name(name: String) -> String {
     }
     let dot_index = name.chars().count() - dot_index - 1;
     return name[..dot_index].to_string();
+}
+
+// Rust doesn't care where you define your functions
+fn say_hello() {
+    println!("Hello!");
+}
+
+fn spit_wisdom(x: u32) -> (String, String) {
+    let value_of_x = format!("The value of x is {}", x);
+    let size_of_x  = format!("The size of x is {} bytes", std::mem::size_of_val(&x));
+    return (value_of_x, size_of_x);
 }
