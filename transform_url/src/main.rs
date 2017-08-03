@@ -67,6 +67,12 @@ fn main() {
     let (wisdom_a, wisdom_b) = spit_wisdom(55);
     println!("{}", wisdom_a);
     println!("{}", wisdom_b);
+
+    let wall_thickness = 2.0;
+    let wall_line_width_0 = 0.2;
+    let wall_line_width_x = 0.2;
+    let line_count = wall_line_count(wall_thickness, wall_line_width_0, wall_line_width_x);
+    println!("The wall line count when the 0th wall is {}, xth wall is {}, and desired wall thickness is {}, is {}", wall_line_width_0, wall_line_width_x, wall_thickness, line_count);
 }
 
 fn addition(a: i32, b: i32) -> i32 {
@@ -124,4 +130,10 @@ fn spit_wisdom(x: u32) -> (String, String) {
     let value_of_x = format!("The value of x is {}", x);
     let size_of_x  = format!("The size of x is {} bytes", std::mem::size_of_val(&x));
     return (value_of_x, size_of_x);
+}
+
+fn wall_line_count(wall_thickness: f64, wall_line_width_0: f64, wall_line_width_x: f64) -> i64 {
+    // magic_spiralize else max(1, round((wall_thickness - wall_line_width_0) / wall_line_width_x) + 1) if wall_thickness != 0 else 0"
+    if wall_thickness == 0.0 { return 0; }
+    return std::cmp::max(1, (((wall_thickness - wall_line_width_0) / wall_line_width_x).round() as i64) + 1);
 }
