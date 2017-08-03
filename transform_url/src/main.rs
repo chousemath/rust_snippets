@@ -69,10 +69,16 @@ fn main() {
     println!("{}", wisdom_b);
 
     let wall_thickness = 2.0;
-    let wall_line_width_0 = 0.2;
+    let wall_line_width_0 = 0.4;
     let wall_line_width_x = 0.2;
     let line_count = wall_line_count(wall_thickness, wall_line_width_0, wall_line_width_x);
     println!("The wall line count when the 0th wall is {}, xth wall is {}, and desired wall thickness is {}, is {}", wall_line_width_0, wall_line_width_x, wall_thickness, line_count);
+
+    let infill_sparse_density = 10.0;
+    let top_thickness = 5.0;
+    let layer_height = 0.2;
+    let t_layers = top_layers(infill_sparse_density, top_thickness, layer_height);
+    println!("Should return 25 -> {}", t_layers);
 }
 
 fn addition(a: i32, b: i32) -> i32 {
@@ -86,7 +92,9 @@ fn transform_url(url: String) -> String {
         if i == '?' {
             break;
         } else {
-            q_index = q_index + 1
+            q_index = q_index + 1;
+            // return empty string if arrived at end of list, and still no `?`
+            if q_index == owned_string.len() { return "".to_string(); }
         }
     }
     let concat_string = format!("{}", &owned_string[..q_index]);
@@ -133,7 +141,14 @@ fn spit_wisdom(x: u32) -> (String, String) {
 }
 
 fn wall_line_count(wall_thickness: f64, wall_line_width_0: f64, wall_line_width_x: f64) -> i64 {
-    // magic_spiralize else max(1, round((wall_thickness - wall_line_width_0) / wall_line_width_x) + 1) if wall_thickness != 0 else 0"
     if wall_thickness == 0.0 { return 0; }
-    return std::cmp::max(1, (((wall_thickness - wall_line_width_0) / wall_line_width_x).round() as i64) + 1);
+    let line_count = (((wall_thickness - wall_line_width_0) / wall_line_width_x).round() as i64) + 1;
+    return std::cmp::max(1, line_count);
+}
+
+fn top_layers(infill_sparse_density: f64, top_thickness: f64, layer_height: f64) -> i64 {
+    if infill_sparse_density == 0.0 { return 0; }
+    let x = top_thickness / layer_height;
+    let rounded = ((x) * 10000.0).round() / 10000.0;
+    return (rounded).ceil() as i64;
 }
