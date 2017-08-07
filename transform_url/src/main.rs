@@ -1,7 +1,11 @@
 fn main() {
     const GIANT_INT: i64 = 100_000_000;
+    // an example of a statement
+    // it will not return a value
     let url = "//waggle-images.s3.amazonaws.com/drive_files/attachments/000/000/343/original/5d3d3d9f1a4f079d6f8bee52ac9b4c73.gcode?1500885304";
     let url2 = format!("{}", url);
+    // calling a function is an example of an expression
+    // calling a macro is also an expression
     println!("{}", transform_url(url2));
 
     let file_name_a = "foobar.stl";
@@ -147,8 +151,11 @@ fn wall_line_count(wall_thickness: f64, wall_line_width_0: f64, wall_line_width_
 }
 
 fn top_layers(infill_sparse_density: f64, top_thickness: f64, layer_height: f64) -> i64 {
-    if infill_sparse_density == 0.0 { return 0; }
+    if infill_sparse_density >= 100.0 { return 0; }
     let x = top_thickness / layer_height;
     let rounded = ((x) * 10000.0).round() / 10000.0;
-    return (rounded).ceil() as i64;
+    (rounded).ceil() as i64
 }
+
+// statements are instructions that perform some action and do not return a value
+// expressions evaluate to a resulting value
